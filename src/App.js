@@ -123,6 +123,7 @@ class Weather extends React.Component {
               min={min.at(i)}
               code={codes.at(i)}
               key={date}
+              isToday={i === 0}
             />
           ))}
         </ul>
@@ -133,13 +134,13 @@ class Weather extends React.Component {
 
 class Day extends React.Component {
   render() {
-    const { date, max, min, code } = this.props;
+    const { date, max, min, code, isToday } = this.props;
     return (
       <li className="day">
-        <span>{code}</span>
-        <p>{date}</p>
+        <span>{getWeatherIcon(code)}</span>
+        <p>{isToday ? "Today" : formatDay(date)}</p>
         <p>
-          {min}&deg; &mdash; {max}&deg;
+          {Math.floor(min)}&deg; &mdash; <strong>{Math.ceil(max)}&deg;</strong>
         </p>
       </li>
     );
